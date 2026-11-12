@@ -50,7 +50,10 @@ cp .env.example .env   # then fill in YOUR sandbox credentials (see below)
 ```
 
 No credentials handy? Skip the `.env` step — the app runs in demo account
-mode so you can click through every agent motion.
+mode so you can click through every agent motion. One key is worth adding
+when you have it: `DEEPSEEK_API_KEY` powers the AI extraction, risk
+analysis, and narration. Without it the deterministic figures still compute
+and the AI steps say "not configured" — they never invent output.
 
 ### Sandbox credentials (you supply these — never commit them)
 
