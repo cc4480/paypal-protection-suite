@@ -1,0 +1,109 @@
+/* PayPal Protection Suite — landing page styles.
+   Same house palette and components as shell.css (loaded first);
+   this file adds only the hero, the carousel, and landing layout. */
+
+body.landing { padding-top: 0; }
+
+/* ---------- hero ---------- */
+.hero { position: relative; margin: 0 calc(-1 * clamp(1rem, 4vw, 3rem));
+  padding: 4.2rem clamp(1rem, 4vw, 3rem) 3rem; overflow: hidden;
+  background: linear-gradient(180deg, #0E1626 0%, var(--bg) 100%);
+  border-bottom: 1px solid #22304d; }
+.hero::before { content: ""; position: absolute; inset: 0;
+  background: url("img/hero-backdrop.jpg") center / cover no-repeat;
+  opacity: .55; animation: kenburns 28s ease-in-out infinite alternate; }
+.hero::after { content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(11, 17, 32, .42) 0%,
+  rgba(11, 17, 32, .22) 45%, var(--bg) 100%); }
+.hero-copy { position: relative; z-index: 1; max-width: 920px;
+  margin: 0 auto; text-align: center; }
+.brand-row { display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1.4rem; }
+.paypal-chip { background: #fff; border-radius: 10px; padding: .55rem .95rem;
+  display: inline-flex; box-shadow: 0 4px 24px rgba(56, 189, 248, .25); }
+.paypal-chip img { height: 30px; width: auto; display: block; }
+.hero-title { font-size: clamp(2.9rem, 7.5vw, 4.9rem); line-height: 1.04;
+  margin: 0; font-weight: 900; letter-spacing: -.01em;
+  text-shadow: 0 2px 34px rgba(0, 0, 0, .6); }
+.hero-sub { font-size: clamp(1.15rem, 2.6vw, 1.55rem); font-weight: 700;
+  margin: .9rem auto 0; text-shadow: 0 1px 18px rgba(0, 0, 0, .6); }
+.hero-sub .accent { color: var(--blue); }
+.hero-lede { color: #B9C6DA; font-size: 1.12rem; line-height: 1.6;
+  max-width: 62ch; margin: 1.1rem auto 0; }
+.hero-lede strong { color: var(--ink); }
+.hero-actions { margin: 1.6rem 0 0; justify-content: center; }
+.btn-big { font-size: 1.05rem; padding: .8rem 1.5rem; border-radius: 10px;
+  text-decoration: none; display: inline-block; }
+.hero-status { margin-top: 1.8rem; text-align: center; }
+.hero-status .ready-note { display: inline; margin-left: .6rem; }
+.hero-status .legend { margin-top: .5rem; }
+
+/* ---------- carousel ---------- */
+.carousel { position: relative; margin: 2rem 0 0; border: 1px solid #22304d;
+  border-radius: 16px; overflow: hidden; background: var(--panel2); }
+.slides { position: relative; aspect-ratio: 16 / 7; }
+.slide { position: absolute; inset: 0; margin: 0; opacity: 0;
+  transition: opacity .6s ease; pointer-events: none; }
+.slide.active { opacity: 1; pointer-events: auto; }
+.slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.slide.active img { animation: slidezoom 7s ease-in-out infinite alternate; }
+@keyframes kenburns { from { transform: scale(1.03); }
+  to { transform: scale(1.13) translate(-1.5%, 1.5%); } }
+@keyframes slidezoom { from { transform: scale(1); }
+  to { transform: scale(1.09) translate(1%, -1%); } }
+@media (prefers-reduced-motion: reduce) {
+  .hero::before, .slide.active img { animation: none; } }
+.slide figcaption { position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 2.2rem 1.4rem 1.1rem; display: flex; flex-direction: column;
+  gap: .25rem; background: linear-gradient(180deg, transparent,
+  rgba(6, 10, 20, .88) 45%); }
+.slide figcaption strong { font-size: clamp(1rem, 2.4vw, 1.35rem); }
+.slide figcaption span { color: #C7D2E4; max-width: 68ch;
+  font-size: clamp(.85rem, 1.8vw, 1rem); line-height: 1.45; }
+.car-btn { position: absolute; top: 42%; transform: translateY(-50%);
+  width: 2.6rem; height: 2.6rem; border-radius: 999px; cursor: pointer;
+  background: rgba(11, 17, 32, .72); color: var(--ink);
+  border: 1px solid var(--blue); font-size: 1.5rem; line-height: 1;
+  backdrop-filter: blur(4px); }
+.car-btn:hover { border-color: var(--red); }
+.car-prev { left: .8rem; }
+.car-next { right: .8rem; }
+.car-dots { position: absolute; right: 1rem; bottom: .9rem; display: flex;
+  gap: .45rem; }
+.car-dots button { width: .72rem; height: .72rem; border-radius: 999px;
+  border: 1px solid var(--blue); background: transparent; cursor: pointer;
+  padding: 0; }
+.car-dots button.active { background: var(--red); border-color: var(--red); }
+@media (max-width: 640px) {
+  .slides { aspect-ratio: 4 / 3; }
+  .slide figcaption span { display: none; }
+}
+
+/* ---------- sections ---------- */
+.agents, .protects { margin-top: 2.6rem; }
+.grid3 { display: grid; gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.grid3 .card { margin: 0; line-height: 1.55; }
+.agent-card .tab-sub { display: block; font-weight: 400; font-size: .82rem;
+  color: var(--muted); margin-top: .15rem; }
+.cta-row { margin-top: 1.6rem; }
+
+/* ---------- section motion ---------- */
+html.reveal-on .reveal { opacity: 0; transform: translateY(22px);
+  transition: opacity .7s ease, transform .7s cubic-bezier(.2, .7, .2, 1); }
+html.reveal-on .reveal.inview { opacity: 1; transform: none; }
+.grid3 .card { transition: transform .35s ease, border-color .35s ease,
+  box-shadow .35s ease; }
+.grid3 .card:hover { transform: translateY(-5px); border-color: #33507E;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, .35),
+    0 0 0 1px rgba(56, 189, 248, .14); }
+.btn-big { transition: transform .25s ease, box-shadow .25s ease; }
+.btn-big:hover { transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(207, 43, 77, .35); }
+.pill { animation: pillpulse 2.6s ease-in-out infinite; }
+@keyframes pillpulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, .35); }
+  50% { box-shadow: 0 0 0 7px rgba(56, 189, 248, 0); } }
+@media (prefers-reduced-motion: reduce) {
+  .pill { animation: none; }
+  html.reveal-on .reveal { opacity: 1; transform: none; transition: none; }
+  .grid3 .card, .btn-big { transition: none; } }

@@ -1,0 +1,13 @@
+# Secrets — never commit (SCOPE §6 risk 7, §7 item 1)
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+
+# Local data (SQLite db + spike output may contain sandbox account data)
+*.db
+*.sqlite3
+spike/results/

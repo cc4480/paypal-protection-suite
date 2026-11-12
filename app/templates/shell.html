@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PayPal Protection Suite</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='shell.css') }}">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand-lockup">
+    <img class="brand-mark"
+      src="{{ url_for('static', filename='img/paypal-mark.svg') }}"
+      alt="PayPal">
+    <div>
+    <h1>PayPal Protection Suite</h1>
+    <p class="tagline">Every protection tool out there works for the seller.
+      These three work for <strong>you</strong>.</p>
+    </div>
+  </div>
+  <div class="readiness">
+    <span id="ready-pill" class="pill pill-warn">CHECKING…</span>
+    <p id="ready-note" class="ready-note"></p>
+    <p class="legend">
+      <span class="stamp stamp-live">LIVE SANDBOX</span> a real call to the
+      PayPal sandbox account happened<br>
+      <span class="stamp stamp-sim">SAMPLE ACCOUNT</span> the agents ran
+      their real motions over the built-in sample data<br>
+      <span class="stamp stamp-sim">SIMULATED</span> a labeled preview —
+      no PayPal call was made
+    </p>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Protection Suite agents">
+  <button class="tab active" id="tab-witness" data-panel="witness"
+    role="tab" aria-selected="true" aria-controls="panel-witness">
+    A · WITNESS <span class="tab-sub">fake-invoice guardian</span></button>
+  <button class="tab" id="tab-seatbelt" data-panel="seatbelt"
+    role="tab" aria-selected="false" aria-controls="panel-seatbelt"
+    tabindex="-1">
+    B · SEATBELT <span class="tab-sub">Friends &amp; Family → protected</span></button>
+  <button class="tab" id="tab-auditor" data-panel="auditor"
+    role="tab" aria-selected="false" aria-controls="panel-auditor"
+    tabindex="-1">
+    C · AUDITOR <span class="tab-sub">history X-ray</span></button>
+  <button class="tab" id="tab-receipts" data-panel="receipts"
+    role="tab" aria-selected="false" aria-controls="panel-receipts"
+    tabindex="-1">
+    RECEIPTS <span class="tab-sub">every call, stamped</span></button>
+</nav>
+
+<!-- ================= WITNESS ================= -->
+<section id="panel-witness" class="panel active" role="tabpanel"
+  aria-labelledby="tab-witness" tabindex="0">
+  <h2>WITNESS — did money actually move?</h2>
+  <p class="lede">Got a scary “PayPal invoice” — a Norton or Geek Squad
+    renewal you never ordered? Paste it here. WITNESS checks it against the
+    account's real PayPal state before you call anyone or pay anything.</p>
+
+  <label class="field-label" for="invoice-text">Invoice text (paste the email or message)</label>
+  <textarea id="invoice-text" rows="6"
+    placeholder="Paste the invoice text here…"></textarea>
+  <label class="field-label" for="invoice-file">…or upload a screenshot / PDF</label>
+  <input id="invoice-file" type="file" accept="image/*,.pdf">
+  <p class="hint">Pasted text is checked by the suite's AI (DeepSeek,
+    WITNESS prompt) as soon as its key is seated in .env. Screenshot /
+    PDF reading (vision) is not wired yet — paste the text.</p>
+
+  <div class="actions">
+    <button id="btn-check" class="btn btn-primary">Check this invoice</button>
+    <button id="btn-witness-preview" class="btn">Preview with a sample scam invoice</button>
+    <button id="btn-recovery" class="btn btn-quiet">I already called or paid</button>
+  </div>
+  <p id="witness-blocked" class="blocked" hidden></p>
+
+  <div id="extraction-card" class="card" hidden>
+    <h3>What the invoice claims <span id="extraction-stamp"></span></h3>
+    <dl class="claims">
+      <div><dt>Amount</dt><dd id="claim-amount">—</dd></div>
+      <div><dt>Seller</dt><dd id="claim-seller">—</dd></div>
+      <div><dt>Invoice ID</dt><dd id="claim-invoice">—</dd></div>
+      <div><dt>Phone in the note</dt>
+        <dd><span id="claim-phone">—</span>
+          <span class="do-not-call">← the number NOT to call</span></dd></div>
+    </dl>
+  </div>
+
+  <div id="verdict" class="verdict" hidden>
+    <p id="verdict-stamp"></p>
+    <p id="verdict-headline" class="verdict-headline"></p>
+    <p id="verdict-body" class="verdict-body"></p>
+    <div class="actions">
+      <button id="btn-decline" class="btn btn-danger">Decline / cancel this invoice</button>
+    </div>
+    <p id="decline-result" class="hint"></p>
+  </div>
+
+  <div id="recovery-packet" class="card" hidden>
+    <h3>Recovery packet — do these in order</h3>
+    <ol>
+      <li>Stop contact with the number in the note. Do not call back.</li>
+      <li>If you paid by card or bank, call that institution now and freeze
+        the payment method you used.</li>
+      <li>If you installed remote-access software they asked for, uninstall
+        it and disconnect the device from the internet until you have.</li>
+      <li>Change your PayPal password and turn on two-factor authentication.</li>
+      <li>Report the invoice in PayPal (Activity → the invoice → Report)
+        and keep the original message — do not delete it.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= SEATBELT ================= -->
+<section id="panel-seatbelt" class="panel" role="tabpanel"
+  aria-labelledby="tab-seatbelt" tabindex="0">
+  <h2>SEATBELT — never send a deposit Friends &amp; Family</h2>
+  <p class="lede">Buying from a Marketplace seller who wants the deposit by
+    Friends &amp; Family? Paste the chat. SEATBELT flags the pressure
+    patterns — then converts the deal onto the protected Goods &amp;
+    Services rail with a real invoice.</p>
+
+  <p class="ff-warning">Friends &amp; Family has NO Buyer Protection.</p>
+
+  <label class="field-label" for="chat-text">Chat with the seller (paste)</label>
+  <textarea id="chat-text" rows="6" placeholder="Paste the chat here…"></textarea>
+  <div class="actions">
+    <button id="btn-analyze" class="btn btn-primary">Analyze this chat</button>
+    <button id="btn-seatbelt-preview" class="btn">Preview with a sample chat</button>
+  </div>
+  <p id="seatbelt-blocked" class="blocked" hidden></p>
+
+  <div id="risk-card" class="card" hidden>
+    <h3>Risk flags <span id="risk-stamp"></span></h3>
+    <p id="risk-level" class="hint"></p>
+    <ul id="risk-list" class="risk-list"></ul>
+  </div>
+
+  <div class="card">
+    <h3>Convert it: protected Goods &amp; Services invoice</h3>
+    <div class="form-grid">
+      <label>Item <input id="inv-item" type="text" placeholder="e.g. iPhone 14 Pro 256GB"></label>
+      <label>Serial / ID number <input id="inv-serial" type="text" placeholder="e.g. IMEI or VIN"></label>
+      <label>Amount (USD) <input id="inv-amount" type="text" inputmode="decimal" placeholder="0.00"></label>
+    </div>
+    <fieldset class="fees">
+      <legend>Who covers the PayPal fee?</legend>
+      <label><input type="radio" name="fee" value="buyer" checked> Buyer covers the fee</label>
+      <label><input type="radio" name="fee" value="seller"> Seller covers the fee</label>
+      <label><input type="radio" name="fee" value="split"> Split it</label>
+    </fieldset>
+    <div class="actions">
+      <button id="btn-generate" class="btn btn-primary">Generate + send protected invoice</button>
+    </div>
+    <div id="invoice-result" hidden>
+      <p id="invoice-stamp"></p>
+      <p id="invoice-summary"></p>
+      <p class="hint">Evidence checklist: keep the chat, photograph the item
+        and serial at handoff, and keep the invoice + payment confirmation.</p>
+    </div>
+  </div>
+
+  <div class="card honesty">
+    <h3>What Buyer Protection does — and does not — cover</h3>
+    <ul>
+      <li>It covers eligible <strong>Goods &amp; Services</strong> payments
+        only. Friends &amp; Family payments are never covered.</li>
+      <li>You must open a dispute within <strong>180 days</strong> of the
+        payment date.</li>
+      <li>Not covered: real estate; motorized vehicles; custom-made or
+        one-off items; gift cards, prepaid cards and other cash equivalents;
+        donations; financial products and investments; items collected in
+        person or paid for in cash; industrial machinery; anything that
+        violates PayPal policy.</li>
+      <li>“Significantly not as described” has a specific standard — an item
+        that works but disappoints may not qualify.</li>
+      <li>You may have to return the item at your own cost before a refund.</li>
+    </ul>
+    <p>Goods &amp; Services is <em>protected with conditions</em> — never a
+      universal guarantee.</p>
+  </div>
+
+  <div id="refusal-card" class="card" hidden>
+    <h3>If the seller refuses to switch</h3>
+    <label class="field-label" for="final-message">Firm final message (copy + send)</label>
+    <textarea id="final-message" rows="4"></textarea>
+    <p class="hint">If they still refuse: walk away. A seller who will only
+      take Friends &amp; Family is telling you the protection is the point
+      they are avoiding.</p>
+  </div>
+</section>
+
+<!-- ================= AUDITOR ================= -->
+<section id="panel-auditor" class="panel" role="tabpanel"
+  aria-labelledby="tab-auditor" tabindex="0">
+  <h2>AUDITOR — the X-ray of your own PayPal history</h2>
+  <p class="lede">One read of your history, one report: what you're still
+    paying for, what you paid twice, what's quietly getting more expensive,
+    and what PayPal actually cost you. Every figure is computed by code —
+    the AI only explains it.</p>
+  <div class="actions">
+    <button id="btn-xray" class="btn btn-primary">Run the X-ray</button>
+    <button id="btn-auditor-preview" class="btn">Preview with sample history</button>
+  </div>
+  <p id="auditor-blocked" class="blocked" hidden></p>
+
+  <div id="xray-report" hidden>
+    <p id="xray-stamp"></p>
+    <div class="grid2">
+      <div class="card"><h3>Forgotten subscriptions</h3>
+        <ul id="xray-subs"></ul></div>
+      <div class="card"><h3>Duplicate charges</h3>
+        <ul id="xray-dupes"></ul></div>
+      <div class="card"><h3>Price creep</h3>
+        <ul id="xray-creep"></ul></div>
+      <div class="card"><h3>True cost totals</h3>
+        <ul id="xray-costs"></ul></div>
+    </div>
+    <div class="card"><h3>In plain language</h3><p id="xray-summary"></p>
+      <p id="xray-action" class="hint"></p></div>
+    <p id="xray-note" class="hint"></p>
+  </div>
+</section>
+
+<!-- ================= RECEIPTS ================= -->
+<section id="panel-receipts" class="panel" role="tabpanel"
+  aria-labelledby="tab-receipts" tabindex="0">
+  <h2>Receipts — every PayPal call, stamped</h2>
+  <p class="lede">Honesty is stored, not just displayed. LIVE SANDBOX means
+    a real call hit the sandbox account. SIMULATED means no call was made —
+    and the receipt always says why.</p>
+  <div class="actions">
+    <button id="btn-refresh-receipts" class="btn">Refresh receipts</button>
+  </div>
+  <table class="receipts-table">
+    <thead><tr><th>When</th><th>Module</th><th>Operation</th>
+      <th>Stamp</th><th>HTTP</th><th>OK</th><th></th></tr></thead>
+    <tbody id="receipts-body">
+      <tr><td colspan="7">No receipts loaded yet.</td></tr>
+    </tbody>
+  </table>
+  <p id="receipt-explain" class="hint"></p>
+</section>
+
+<footer class="foot">
+  <p><a href="/">← Back to the home page</a></p>
+  <p>Demo honesty note: live third-party account access requires PayPal
+    partner approval. With sandbox keys seated, this demo runs against
+    one real PayPal sandbox account; without them, the same motions run
+    on a built-in demo account with sample data — labeled wherever its
+    data appears.</p>
+</footer>
+
+<script src="{{ url_for('static', filename='shell.js') }}"></script>
+</body>
+</html>

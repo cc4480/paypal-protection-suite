@@ -1,0 +1,104 @@
+/* PayPal Protection Suite — shell styles.
+   House palette: interior #0B1120, diamond red #CF2B4D, crosshair blue #38BDF8. */
+:root {
+  color-scheme: dark;
+  --bg: #0B1120; --panel: #111A2E; --panel2: #0E1626;
+  --red: #CF2B4D; --blue: #38BDF8; --ink: #E8EDF5; --muted: #94A3B8;
+  --ok: #34D399; --warn: #FBBF24;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  padding: 1.5rem clamp(1rem, 4vw, 3rem) 3rem; }
+h1 { margin: 0; font-size: 1.9rem; }
+h2 { margin-top: 0; }
+.tagline { color: var(--blue); margin: .35rem 0 0; font-size: 1.05rem; }
+
+.topbar { display: flex; justify-content: space-between; gap: 2rem;
+  flex-wrap: wrap; border-bottom: 1px solid #22304d; padding-bottom: 1rem; }
+.readiness { text-align: right; min-width: 260px; }
+.pill { font-weight: 700; letter-spacing: .06em; padding: .3rem .7rem;
+  border-radius: 999px; font-size: .8rem; }
+.pill-ok { background: #064E3B; color: var(--ok); border: 1px solid var(--ok); }
+.pill-warn { background: #451A03; color: var(--warn); border: 1px solid var(--warn); }
+.ready-note { color: var(--muted); font-size: .82rem; margin: .45rem 0; }
+.legend { color: var(--muted); font-size: .78rem; line-height: 1.7; margin: 0; }
+.stamp { font-weight: 700; font-size: .72rem; letter-spacing: .05em;
+  padding: .12rem .45rem; border-radius: 4px; white-space: nowrap; }
+.stamp-live { background: #064E3B; color: var(--ok); border: 1px solid var(--ok); }
+.stamp-sim { background: #3B2F04; color: var(--warn); border: 1px solid var(--warn); }
+.stamp-ai { background: #0B2A4A; color: var(--blue); border: 1px solid var(--blue); }
+
+.tabs { display: flex; gap: .5rem; flex-wrap: wrap; margin: 1.25rem 0; }
+.tab { background: var(--panel2); color: var(--ink); border: 1px solid #22304d;
+  border-radius: 10px; padding: .7rem 1.1rem; font-size: 1rem; font-weight: 700;
+  cursor: pointer; text-align: left; }
+.tab .tab-sub { display: block; font-weight: 400; font-size: .78rem;
+  color: var(--muted); }
+.tab.active { border-color: var(--red); box-shadow: inset 0 0 0 1px var(--red); }
+.tab:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+.panel { display: none; border: 1px solid #22304d; border-radius: 14px;
+  background: var(--panel); padding: 1.5rem; }
+.panel.active { display: block; }
+.lede { color: var(--muted); max-width: 65ch; }
+.field-label { display: block; font-weight: 600; margin: 1rem 0 .35rem; }
+textarea, input[type="text"], input[type="file"] { width: 100%;
+  background: var(--panel2); color: var(--ink); border: 1px solid #22304d;
+  border-radius: 8px; padding: .6rem; font: inherit; }
+.hint { color: var(--muted); font-size: .85rem; }
+.actions { display: flex; gap: .6rem; flex-wrap: wrap; margin: 1rem 0; }
+.btn { background: var(--panel2); color: var(--ink); border: 1px solid var(--blue);
+  border-radius: 8px; padding: .6rem 1.1rem; font: inherit; font-weight: 600;
+  cursor: pointer; }
+.btn-primary { background: var(--red); border-color: var(--red); color: #fff; }
+.btn-danger { background: transparent; border-color: var(--red); color: #Fda4af; }
+.btn-quiet { border-color: #22304d; color: var(--muted); }
+.blocked { border: 1px solid var(--warn); color: var(--warn);
+  background: #451A03; border-radius: 8px; padding: .7rem 1rem; }
+
+.card { border: 1px solid #22304d; border-radius: 12px;
+  background: var(--panel2); padding: 1rem 1.25rem; margin: 1rem 0; }
+.card h3 { margin-top: 0; }
+.claims { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: .75rem; }
+.claims dt { color: var(--muted); font-size: .8rem; text-transform: uppercase;
+  letter-spacing: .06em; }
+.claims dd { margin: .2rem 0 0; font-size: 1.15rem; font-weight: 700; }
+.do-not-call { color: var(--red); font-size: .85rem; font-weight: 700; }
+
+.verdict { border: 2px solid var(--ok); border-radius: 14px;
+  background: #06281D; padding: 1.5rem; margin: 1rem 0; }
+.verdict.paid { border-color: var(--red); background: #2A0A13; }
+.verdict-headline { font-size: clamp(2rem, 6vw, 3.6rem); font-weight: 900;
+  line-height: 1.05; margin: .4rem 0; }
+.verdict-body { font-size: 1.2rem; max-width: 60ch; }
+
+.ff-warning { font-size: clamp(1.3rem, 3.5vw, 2rem); font-weight: 900;
+  color: #FDA4AF; border: 2px solid var(--red); border-radius: 12px;
+  padding: 1rem 1.25rem; background: #2A0A13; }
+.risk-list li { margin: .45rem 0; }
+.risk-list blockquote { margin: .25rem 0 .6rem; color: var(--blue);
+  border-left: 3px solid var(--blue); padding-left: .7rem; font-style: italic; }
+.form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: .8rem; }
+.form-grid label { font-weight: 600; font-size: .9rem; }
+.fees { border: 1px solid #22304d; border-radius: 8px; margin-top: 1rem; }
+.fees label { display: block; margin: .3rem 0; font-weight: 400; }
+.honesty ul { line-height: 1.55; }
+
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem; }
+.grid2 .card { margin: 0; }
+.grid2 ul { padding-left: 1.1rem; line-height: 1.5; }
+
+.receipts-table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+.receipts-table th, .receipts-table td { border-bottom: 1px solid #22304d;
+  padding: .45rem .6rem; text-align: left; }
+.receipts-table th { color: var(--muted); text-transform: uppercase;
+  font-size: .72rem; letter-spacing: .06em; }
+.foot { color: var(--muted); font-size: .85rem; margin-top: 2rem;
+  border-top: 1px solid #22304d; padding-top: 1rem; }
+.foot a { color: var(--blue); }
+.brand-lockup { display: flex; gap: .75rem; align-items: flex-start; }
+.brand-mark { width: 32px; height: 32px; margin-top: .3rem; }

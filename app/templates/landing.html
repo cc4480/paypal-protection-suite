@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PayPal Protection Suite — three agents that work for the buyer</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='shell.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='landing.css') }}">
+</head>
+<body class="landing">
+
+<header class="hero">
+  <div class="hero-copy">
+    <div class="brand-row">
+      <span class="paypal-chip"><img
+        src="{{ url_for('static', filename='img/paypal-logo.svg') }}"
+        alt="PayPal"></span>
+    </div>
+    <h1 class="hero-title">PayPal Protection Suite</h1>
+    <p class="hero-sub">Every protection tool out there works for the seller.
+      <span class="accent">These three work for you.</span></p>
+    <p class="hero-lede">A buyer-side protection suite for PayPal. It checks
+      scary invoices against your <strong>real account</strong> before you
+      pay, turns risky Friends &amp; Family deals into
+      <strong>protected Goods &amp; Services invoices</strong>, and X-rays
+      your history for the charges you forgot, paid twice, or watched
+      quietly creep up.</p>
+    <div class="actions hero-actions">
+      <a class="btn btn-primary btn-big" href="/app">Open the suite →</a>
+      <a class="btn btn-big" href="#agents">Meet the three agents</a>
+    </div>
+    <div class="hero-status">
+      <span id="ready-pill" class="pill pill-warn">CHECKING…</span>
+      <p id="ready-note" class="ready-note"></p>
+      <p class="legend">
+        <span class="stamp stamp-live">LIVE SANDBOX</span> a real call to the
+        PayPal sandbox account happened<br>
+        <span class="stamp stamp-sim">SIMULATED</span> a labeled preview —
+        no PayPal call was made
+      </p>
+    </div>
+  </div>
+</header>
+
+<section class="carousel reveal" aria-label="The three agents in pictures">
+  <div class="slides" id="slides">
+    <figure class="slide active">
+      <img src="{{ url_for('static', filename='img/slide-witness.jpg') }}"
+        alt="A shield and a red magnifying glass examining a flagged invoice">
+      <figcaption>
+        <strong>A · WITNESS — did money actually move?</strong>
+        <span>Got a “renewal” invoice you never ordered? WITNESS reads it,
+          then checks the account's real PayPal state before you call the
+          number in the note — or pay anything.</span>
+      </figcaption>
+    </figure>
+    <figure class="slide">
+      <img src="{{ url_for('static', filename='img/slide-seatbelt.jpg') }}"
+        alt="A seatbelt with a glowing red buckle strapped across a phone chat">
+      <figcaption>
+        <strong>B · SEATBELT — never send a deposit Friends &amp; Family</strong>
+        <span>SEATBELT flags the pressure patterns in a seller chat, then
+          converts the deal onto the protected Goods &amp; Services rail
+          with a real invoice.</span>
+      </figcaption>
+    </figure>
+    <figure class="slide">
+      <img src="{{ url_for('static', filename='img/slide-auditor.jpg') }}"
+        alt="An X-ray scan of a transaction list with duplicate charges highlighted">
+      <figcaption>
+        <strong>C · AUDITOR — the X-ray of your own PayPal history</strong>
+        <span>Forgotten subscriptions, duplicate charges, price creep, and
+          what PayPal actually cost you. Every figure is computed by code —
+          the AI only explains it.</span>
+      </figcaption>
+    </figure>
+  </div>
+  <button class="car-btn car-prev" id="car-prev" aria-label="Previous slide">‹</button>
+  <button class="car-btn car-next" id="car-next" aria-label="Next slide">›</button>
+  <div class="car-dots" id="car-dots" role="tablist" aria-label="Choose slide"></div>
+</section>
+
+<section id="agents" class="agents reveal">
+  <h2>What the suite does — in plain words</h2>
+  <div class="grid3">
+    <div class="card agent-card">
+      <h3>A · WITNESS <span class="tab-sub">fake-invoice guardian</span></h3>
+      <p>Paste the invoice email. WITNESS pulls out what it claims — amount,
+        seller, invoice ID, the phone number in the note — then looks the
+        invoice up in the account and reads 31 days of real transactions.
+        If it isn't there, you owe nothing, and the suite can cancel the
+        invoice for you. No live account check, no verdict: the answer is
+        forced to <strong>UNVERIFIED</strong>.</p>
+    </div>
+    <div class="card agent-card">
+      <h3>B · SEATBELT <span class="tab-sub">Friends &amp; Family → protected</span></h3>
+      <p>Paste the seller chat. SEATBELT quotes the exact lines that pressure
+        you — urgency, secrecy, “friends only” — and rates the risk. Then
+        one click creates and sends a real Goods &amp; Services invoice,
+        fee math included, so the payment lands on the rail Buyer
+        Protection actually covers.</p>
+    </div>
+    <div class="card agent-card">
+      <h3>C · AUDITOR <span class="tab-sub">history X-ray</span></h3>
+      <p>One read of 180 days of history, one report: subscriptions you're
+        still paying for, charges that hit twice, prices that crept up, and
+        your true totals — fees and currency-conversion spread included.
+        If the history can't be pulled, the X-ray fails loudly instead of
+        quietly showing you sample data.</p>
+    </div>
+  </div>
+</section>
+
+<section class="protects reveal">
+  <h2>How it protects you — and where the protection stops</h2>
+  <div class="grid3">
+    <div class="card">
+      <h3>It checks the account, not the story</h3>
+      <p>Scam invoices are written to sound real. WITNESS doesn't grade the
+        writing — it asks PayPal what actually happened, and says
+        UNVERIFIED when it couldn't ask.</p>
+    </div>
+    <div class="card">
+      <h3>Every call is stamped</h3>
+      <p><span class="stamp stamp-live">LIVE SANDBOX</span> means a real call
+        hit the sandbox account. <span class="stamp stamp-sim">SIMULATED</span>
+        means a labeled preview. The receipts page stores every call —
+        honesty is kept, not just displayed.</p>
+    </div>
+    <div class="card">
+      <h3>Protection has conditions</h3>
+      <p>Friends &amp; Family has NO Buyer Protection. Goods &amp; Services
+        disputes must be opened within <strong>180 days</strong>. Goods
+        &amp; Services is <em>protected with conditions</em> — never a
+        universal guarantee, and this page won't pretend otherwise.</p>
+    </div>
+  </div>
+  <div class="actions cta-row">
+    <a class="btn btn-primary btn-big" href="/app">Open the suite →</a>
+  </div>
+</section>
+
+<footer class="foot reveal">
+  <p>Demo honesty note: live third-party account access requires PayPal
+    partner approval. This demo runs against one real PayPal sandbox
+    account, labeled wherever its data appears.</p>
+</footer>
+
+<script src="{{ url_for('static', filename='landing.js') }}"></script>
+</body>
+</html>
