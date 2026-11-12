@@ -27,38 +27,35 @@ Deadline: Thu Nov 12, 2026, 14:00 CST. Building stops 10:00 CST that day (SCOPE.
 
 1. **Bridge restart** (also unblocks the retrain check and any PC work — bridge recovered during the evening of Nov 11, then the tunnel dropped again, recorded 20:06 CST Nov 11). Steps already given in chat: elevated PowerShell, kill bridge `server.py` processes, `Start-ScheduledTask -TaskName 'AlterEgo Bridge (Elevated)'`. Until it is back, no app restart or live acceptance run is possible.
 2. **Seat sandbox credentials himself** in the project's `.env` (never paste into chat): PayPal sandbox Client ID + Secret from developer.paypal.com, plus the two sandbox test-account emails (business = demo account, personal = S3 test). `.env.example` lists the exact key names.
-3. **Final product name — DECIDED 2026-11-11:** "PayPal Protection Suite" stays (Carlos's call). Suggested repo name is now `paypal-protection-suite` to match (still needs his yes before creation).
-4. **Record/approve the demo video** (< 3:00, public) and confirm it is PUBLIC before submission; file the submission from his Devpost account.
+3. **Final product name — DECIDED 2026-11-11:** "PayPal Protection Suite" stays (Carlos's call). **Repo CREATED 2026-11-11 ~21:25 CST at Carlos's direction: https://github.com/cc4480/paypal-protection-suite — PUBLIC, MIT license, demo video included in the repo.**
+4. **Demo video:** DONE (1:36, in the repo). Devpost's video field still needs Carlos's own upload from his account at submission time.
+5. **Keys — Carlos's call 2026-11-11 ~21:15 CST:** he is having trouble getting the sandbox keys, so the submission goes WITHOUT them: the app ships in its built-in demo account mode (sample data, every motion real, stamped SAMPLE ACCOUNT). Live sandbox mode is wired and ready — seating PAYPAL_CLIENT_ID + PAYPAL_CLIENT_SECRET in `.env` switches it with no code change.
 
-Order that saves tomorrow: restart bridge + seat keys TODAY, so the spike (S1–S4), demo-account seeding, live re-verify of A/B/C, video recording, and submission pack all fit before the 10:00 CST build stop — not compressed into the 10:00–14:00 window.
+State the night before: tests 52/52 on both copies; app live on the PC (landing + shell 200, DeepSeek ready, account_mode demo); repo public and verified reachable anonymously. A turn-in task is set for Thu 2026-11-12 12:00 CST to assemble the final pack ahead of the 14:00 deadline.
 
 ## Devpost draft fields (from SCOPE.md positioning + README.md)
 
 **Project name:** PayPal Protection Suite (DECIDED by Carlos 2026-11-11 — name kept; the PayPal wordmark now sits in the landing hero and the monogram in the app header)
-**Tagline:** Every AI agent in this hackathon works for the seller. These three work for you.
-**Repo:** [NEEDS CARLOS — suggested: https://github.com/cc4480/paypal-protection-suite — confirm before creation]
-**Demo video:** DONE — 1:36 tight cut, delivered in chat (link good until Fri Nov 13 ~15:15 CST), composition synced to PC `/video`. [NEEDS CARLOS — upload PUBLIC, paste URL]
+**Tagline:** Every protection tool out there works for the seller. These three work for you.
+**Repo:** https://github.com/cc4480/paypal-protection-suite (PUBLIC, created 2026-11-11)
+**Demo video:** DONE — 1:36 tight cut, shipped inside the repo as `paypal-demo-final.mp4`. [CARLOS at submission: upload it to Devpost / a public video host from his account and paste the URL]
 
 **What it does (inspiration + what it does):**
 PayPal scams hit buyers, and every protection tool out there is built for sellers. This suite flips it: three buyer-side agents in one app. WITNESS takes a scary "PayPal invoice" — the fake Norton/Geek Squad renewal class — extracts the claim, checks it against the account's real PayPal state, and answers one question in giant type: did money actually move? SEATBELT catches a seller pushing a Friends & Family payment and converts the deal onto the protected Goods & Services rail by generating a real G&S invoice, with Buyer Protection stated with its exclusions, never as a guarantee. AUDITOR X-rays your own PayPal history once: forgotten subscriptions, duplicate charges, price creep, and the true total of fees and conversion spread you paid.
 
 **How we built it:**
-Flask + SQLite, raw HTTPS to the PayPal sandbox REST APIs (no SDK) so every request and response is visible for honest receipts. All money math is deterministic Python; the AI does extraction (WITNESS), evidence-quoted risk analysis and message drafting (SEATBELT), and report narration (AUDITOR) — load-bearing in all three modules, not decoration. DeepSeek Flash is the test default for vision and text. Every PayPal call is logged and stamped LIVE SANDBOX or SIMULATED in the UI and in stored output; a dry run is labeled, never dressed up.
+Flask + SQLite, raw HTTPS to the PayPal sandbox REST APIs (no SDK) so every request and response is visible for honest receipts. All money math is deterministic Python; the AI does extraction (WITNESS), evidence-quoted risk analysis and message drafting (SEATBELT), and report narration (AUDITOR) — load-bearing in all three modules, not decoration. DeepSeek is the model for vision and text. Every PayPal call is logged and stamped LIVE or SAMPLE ACCOUNT in the UI and in stored output; sample data is labeled, never dressed up.
 
 **Honest access note (goes in README and video close):**
-Live third-party account access — reading another user's PayPal history with their consent — requires PayPal partner approval. The demo runs against one real PayPal sandbox account, labeled in the UI as the demo account, and every verdict is computed from live sandbox API responses for that account.
+Live third-party account access — reading another user's PayPal history with their consent — requires PayPal partner approval. The submitted demo runs on the app's built-in demo account: a seeded sample ledger (PayPal-shaped invoices and transactions) that the same agent code runs against, with every result stamped SAMPLE ACCOUNT. Seat real sandbox credentials and the identical code runs against the live PayPal sandbox instead.
 
 **Challenges:**
-The partner gate above is the biggest one: S3 (Log in with PayPal, user-context reads) is expected to fail for a non-partner app, which selects the F1 fallback — one real sandbox demo account, presented honestly. The access spike (S1–S4) pins down exactly what the demo can claim before any module code runs; if S1 fails, the build stops rather than faking ledger data.
+The partner gate above is the biggest one: S3 (Log in with PayPal, user-context reads) is expected to fail for a non-partner app. The build answers it with honesty enforced in code: a decisive WITNESS verdict is impossible without an account check, and the app ships with a built-in demo account whose sample data is stamped as such on every screen and receipt — the motions are real, the data is labeled. Getting live sandbox credentials seated was the other fight; the two-mode design means the submission never depends on them.
 
 **Built with:** Python, Flask, SQLite, PayPal REST APIs (Invoicing v2, Transaction Search v1), DeepSeek.
 
-**Video outline (< 3:00, SCOPE §5):**
-0:00–0:15 hook — "Every AI agent in this hackathon works for the seller. These three work for you."
-0:15–1:05 Module A — $499.99 "Norton renewal" invoice; WITNESS verdict "No money has left your account"; LIVE SANDBOX receipt; one-click decline flips status on re-read.
-1:05–1:55 Module B — Marketplace chat demanding F&F; SEATBELT flags it, states F&F has no Buyer Protection, generates and sends the protected G&S invoice; exclusions line on camera.
-1:55–2:40 Module C — X-ray report: a forgotten subscription, one duplicate, one price crept 40%, total fees paid.
-2:40–3:00 close — three agents, one app, buyer-side; partner-approval sentence; repo URL on screen.
+**Video (SHIPPED — supersedes the SCOPE §5 outline):**
+1:36 final cut, 8 scenes incl. logo end-card ("Three agents. One side: yours."), generated voiceover, faithful recreations of the app's real screens and figures (Norton invoice $499.99, SEATBELT $250 → $259.55, AUDITOR X-ray findings). File: `paypal-demo-final.mp4` in the repo.
 
 ## After PayPal (for sequencing, not for this submission)
 
